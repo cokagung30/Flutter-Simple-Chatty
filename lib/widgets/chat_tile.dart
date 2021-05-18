@@ -1,3 +1,4 @@
+import 'package:bwa_chatty/pages/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bwa_chatty/theme.dart';
 
@@ -12,43 +13,49 @@ class ChatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+    return InkWell(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+            return ChatPage();
+          }));
+        },
+        child: Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.asset(
-                imageUrl,
-                width: 55,
-                height: 55,
-              ),
-              SizedBox(
-                width: 12,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Row(
                 children: [
-                  Text(
-                    name,
-                    style: userSendMessageTextStyle,
+                  Image.asset(
+                    imageUrl,
+                    width: 55,
+                    height: 55,
                   ),
-                  Text(
-                    message,
-                    style: messageTextStyle.copyWith(
-                        color: (unRead) ? blackColor : darkGreyColor),
-                  )
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: userSendMessageTextStyle,
+                      ),
+                      Text(
+                        message,
+                        style: messageTextStyle.copyWith(
+                            color: (unRead) ? blackColor : darkGreyColor),
+                      )
+                    ],
+                  ),
                 ],
               ),
+              Text(
+                time,
+                style: timeReceiveMessageTextStyle,
+              )
             ],
           ),
-          Text(
-            time,
-            style: timeReceiveMessageTextStyle,
-          )
-        ],
-      ),
-    );
+        ));
   }
 }
